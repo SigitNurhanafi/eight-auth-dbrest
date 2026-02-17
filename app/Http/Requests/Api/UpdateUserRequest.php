@@ -12,7 +12,12 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->can('update', $this->route('user'));
+        $user = $this->route('user');
+        if (is_string($user)) {
+            $user = \App\Models\User::find($user);
+        }
+
+        return $this->user()->can('update', $user);
     }
 
     /**
@@ -38,6 +43,15 @@ class UpdateUserRequest extends FormRequest
                 'in:admin,user',
                 // Only admin can update roles
                 function ($attribute, $value, $fail) {
+                    $userToUpdate = $this->route('user');
+                    if (is_string($userToUpdate)) {
+                        $userToUpdate = \App\Models\User::find($userToUpdate);
+                    }
+
+                    if (!$userToUpdate) {
+                        return; // Controller will handle 404
+                    }
+
                     // Hanya admin yang bisa ubah role
                     if ($value && !$this->user()->isAdmin()) {
                         $fail('Hanya admin yang boleh mengubah role.');
@@ -45,9 +59,9 @@ class UpdateUserRequest extends FormRequest
                     }
 
                     // Cek jika role benar-benar berubah
-                    if ($value && $value !== $this->route('user')->role) {
+                    if ($value && $value !== $userToUpdate->role) {
                         // Tidak boleh ubah role sendiri
-                        if ($this->route('user')->id === $this->user()->id) {
+                        if ($userToUpdate->id === $this->user()->id) {
                             $fail('Anda tidak boleh mengubah role Anda sendiri.');
                             return;
                         }
