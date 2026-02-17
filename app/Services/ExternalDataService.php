@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Repositories\ExternalDataRepository;
 use Exception;
 
-class DataService
+class ExternalDataService
 {
     private const REQUIRED_COLUMNS = ['YMD', 'NIM', 'NAMA'];
 
