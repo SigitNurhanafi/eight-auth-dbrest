@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\FullUpdateUserRequest;
 use App\Http\Requests\Api\StoreUserRequest;
 use App\Http\Requests\Api\UpdateUserRequest;
 use App\Http\Resources\UserResource;
@@ -47,9 +48,22 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Full update (PUT) - semua field wajib diisi.
      */
-    public function update(UpdateUserRequest $request, User $user): UserResource
+    public function fullUpdate(FullUpdateUserRequest $request, User $user): UserResource
+    {
+        $data = $request->validated();
+        $data['password'] = Hash::make($data['password']);
+
+        $user->update($data);
+
+        return new UserResource($user);
+    }
+
+    /**
+     * Partial update (PATCH) - hanya field yang dikirim.
+     */
+    public function partialUpdate(UpdateUserRequest $request, User $user): UserResource
     {
         $data = $request->validated();
 

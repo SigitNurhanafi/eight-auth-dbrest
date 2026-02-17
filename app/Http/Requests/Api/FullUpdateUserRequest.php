@@ -5,7 +5,7 @@ namespace App\Http\Requests\Api;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateUserRequest extends FormRequest
+class FullUpdateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -17,23 +17,24 @@ class UpdateUserRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
+     * PUT = full update, semua field wajib diisi.
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
-            'name' => ['sometimes', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255'],
             'email' => [
-                'sometimes',
+                'required',
                 'string',
                 'email',
                 'max:255',
                 Rule::unique('users')->ignore($this->route('user'))
             ],
-            'password' => ['sometimes', 'string', 'min:8'],
+            'password' => ['required', 'string', 'min:8'],
             'role' => [
-                'sometimes',
+                'required',
                 'string',
                 'in:admin,user',
                 // Only admin can update roles

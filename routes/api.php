@@ -7,15 +7,24 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\AuthController;
 
-Route::post('/register', [AuthController::class , 'register']);
-Route::post('/login', [AuthController::class , 'login']);
+Route::post('/login', [AuthController::class, 'login'])->name('api:login');
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/user', function (Request $request) {
+    Route::get(
+        '/user',
+        function (Request $request) {
             return $request->user();
         }
-        );
-        Route::apiResource('users', \App\Http\Controllers\Api\UserController::class);
-        Route::get('/data', [\App\Http\Controllers\Api\DataController::class , 'fetchData']);
-        Route::post('/logout', [AuthController::class , 'logout']);
-    });
+    );
+
+    // CRUD Users — PUT dan PATCH dipisah
+    Route::apiResource('users', \App\Http\Controllers\Api\UserController::class)
+        ->except(['update']);
+    Route::put('/users/{user}', [\App\Http\Controllers\Api\UserController::class, 'fullUpdate'])
+        ->name('users.fullUpdate');
+    Route::patch('/users/{user}', [\App\Http\Controllers\Api\UserController::class, 'partialUpdate'])
+        ->name('users.partialUpdate');
+
+    Route::get('/data', [\App\Http\Controllers\Api\DataController::class, 'fetchData']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+});
