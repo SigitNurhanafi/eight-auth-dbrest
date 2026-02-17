@@ -22,7 +22,7 @@ class ExternalDataRepository
         }
 
         try {
-            $response = Http::get($url);
+            $response = Http::timeout(10)->get($url);
 
             if (!$response->successful()) {
                 Log::error('External API returned error status: ' . $response->status());
