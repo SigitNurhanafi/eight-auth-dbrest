@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Services\DataService;
+use App\Services\ExternalDataService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -13,13 +13,13 @@ class DataController extends Controller
 {
     protected $dataService;
 
-    public function __construct(DataService $dataService)
+    public function __construct(ExternalDataService $dataService)
     {
         $this->dataService = $dataService;
     }
 
     /**
-     * Fetch data from external URL and filter it via DataService.
+     * Fetch data from external URL and filter it via ExternalDataService.
      *
      * @param Request $request
      * @return JsonResponse
@@ -34,8 +34,7 @@ class DataController extends Controller
                 'RCM' => 'OK',
                 'DATA' => $data
             ]);
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             Log::error('Data Fetch Error: ' . $e->getMessage());
 
             $statusCode = $e->getCode();
