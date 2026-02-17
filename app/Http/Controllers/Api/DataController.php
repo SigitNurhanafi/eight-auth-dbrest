@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\SearchDataRequest;
 use App\Services\ExternalDataService;
 use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class DataController extends Controller
@@ -21,13 +21,13 @@ class DataController extends Controller
     /**
      * Fetch data from external URL and filter it via ExternalDataService.
      *
-     * @param Request $request
+     * @param SearchDataRequest $request
      * @return JsonResponse
      */
-    public function fetchData(Request $request): JsonResponse
+    public function fetchData(SearchDataRequest $request): JsonResponse
     {
         try {
-            $data = $this->dataService->getFilteredData($request->all());
+            $data = $this->dataService->getFilteredData($request->validated());
 
             return response()->json([
                 'RC' => 200,
