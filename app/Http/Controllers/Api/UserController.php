@@ -83,6 +83,13 @@ class UserController extends Controller
     {
         $this->authorize('delete', $user);
 
+        // Jangan boleh delete diri sendiri
+        if ($user->id === auth()->id()) {
+            return response()->json([
+                'message' => 'Anda tidak diperbolehkan menghapus akun sendiri.'
+            ], 403);
+        }
+
         $user->delete();
 
         return response()->json([

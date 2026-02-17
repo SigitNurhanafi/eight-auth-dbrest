@@ -111,17 +111,17 @@ class ExternalDataService
     private function matchesFilters(array $row, array $filters): bool
     {
         if (
-            !empty($filters['nama'])
-            && !str_contains(strtolower($row['NAMA']), strtolower($filters['nama']))
+            !empty($filters['NAMA'])
+            && !str_contains(strtolower($row['NAMA']), strtolower($filters['NAMA']))
         ) {
             return false;
         }
 
-        if (!empty($filters['nim']) && $row['NIM'] !== $filters['nim']) {
+        if (!empty($filters['NIM']) && $row['NIM'] !== $filters['NIM']) {
             return false;
         }
 
-        if (!empty($filters['ymd']) && $row['YMD'] !== $filters['ymd']) {
+        if (!empty($filters['YMD']) && $row['YMD'] !== $filters['YMD']) {
             return false;
         }
 

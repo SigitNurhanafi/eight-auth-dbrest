@@ -23,9 +23,9 @@ class SearchDataRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama' => 'sometimes|nullable|string|min:3',
-            'nim' => 'sometimes|nullable|numeric',
-            'ymd' => 'sometimes|nullable|numeric|digits:8',
+            'NAMA' => 'sometimes|nullable|string|min:3',
+            'NIM' => 'sometimes|nullable|numeric',
+            'YMD' => 'sometimes|nullable|numeric|digits:8',
         ];
     }
 
@@ -35,9 +35,9 @@ class SearchDataRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'nama.min' => 'Pencarian nama minimal harus 3 karakter.',
-            'nim.numeric' => 'NIM harus berupa angka.',
-            'ymd.digits' => 'Format tanggal (ymd) harus 8 digit (contoh: 20230405).',
+            'NAMA.min' => 'Pencarian NAMA minimal harus 3 karakter.',
+            'NIM.numeric' => 'NIM harus berupa angka.',
+            'YMD.digits' => 'Format tanggal (YMD) harus 8 digit (contoh: 20230405).',
         ];
     }
 }
