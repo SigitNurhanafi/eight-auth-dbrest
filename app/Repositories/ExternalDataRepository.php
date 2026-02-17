@@ -30,8 +30,7 @@ class ExternalDataRepository
             }
 
             return $response->json();
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             Log::error('External Repository Error: ' . $e->getMessage());
             return null;
         }
