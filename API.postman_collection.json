@@ -1,0 +1,503 @@
+{
+  "info": {
+    "_postman_id": "19f23650-1163-4d80-ab79-71aa7a46400d",
+    "name": "API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52456639",
+    "_collection_link": "https://go.postman.co/collection/52456639-19f23650-1163-4d80-ab79-71aa7a46400d?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "For Auth",
+      "item": [
+        {
+          "name": "Get Info User Auth",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8787/api/user",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8787",
+              "path": [
+                "api",
+                "user"
+              ]
+            },
+            "description": "Generated from cURL: curl -X GET http://localhost/api/user \\\r\n     -H \"Authorization: Bearer <TOKEN>\" \\\r\n     -H \"Accept: application/json\""
+          },
+          "response": []
+        },
+        {
+          "name": "Logout User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8787/api/logout",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8787",
+              "path": [
+                "api",
+                "logout"
+              ]
+            },
+            "description": "Generated from cURL: curl -X POST http://localhost/api/logout \\\r\n     -H \"Authorization: Bearer <TOKEN>\" \\\r\n     -H \"Accept: application/json\""
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "As Admin",
+      "item": [
+        {
+          "name": "Get All User",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8787/api/users",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8787",
+              "path": [
+                "api",
+                "users"
+              ]
+            },
+            "description": "Generated from cURL: curl -X GET http://localhost/api/users \\\r\n     -H \"Authorization: Bearer <ADMIN_TOKEN>\" \\\r\n     -H \"Accept: application/json\""
+          },
+          "response": []
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"New Staff\",\r\n    \"email\": \"{{$randomInt}}staff999@example.com\",\r\n    \"password\": \"password\",\r\n    \"role\": \"user\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8787/api/users",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8787",
+              "path": [
+                "api",
+                "users"
+              ]
+            },
+            "description": "Generated from cURL: curl -X POST http://localhost/api/users \\\r\n     -H \"Authorization: Bearer <ADMIN_TOKEN>\" \\\r\n     -H \"Content-Type: application/json\" \\\r\n     -H \"Accept: application/json\" \\\r\n     -d '{\"name\": \"New Staff\", \"email\": \"staff@example.com\", \"password\": \"password\", \"role\": \"user\"}'"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Part Data User",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Updated Name\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8787/api/users/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8787",
+              "path": [
+                "api",
+                "users",
+                "1"
+              ]
+            },
+            "description": "Generated from cURL: curl -X PATCH http://localhost/api/users/<USER_ID> \\\r\n     -H \"Authorization: Bearer <TOKEN>\" \\\r\n     -H \"Content-Type: application/json\" \\\r\n     -H \"Accept: application/json\" \\\r\n     -d '{\"name\": \"Updated Name\"}'"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Data User By ID",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8787/api/users/3",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8787",
+              "path": [
+                "api",
+                "users",
+                "3"
+              ]
+            },
+            "description": "Generated from cURL: curl -X DELETE http://localhost/api/users/<USER_ID> \\\r\n     -H \"Authorization: Bearer <ADMIN_TOKEN>\" \\\r\n     -H \"Accept: application/json\""
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Fetch External Data",
+      "item": [
+        {
+          "name": "Fetch Data External",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8787/api/data",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8787",
+              "path": [
+                "api",
+                "data"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Fetch Data External with NAMA",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8787/api/data?NAMA=Turner Mia",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8787",
+              "path": [
+                "api",
+                "data"
+              ],
+              "query": [
+                {
+                  "key": "NAMA",
+                  "value": "Turner Mia"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Fetch Data External with NIM",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8787/api/data?NIM=9352078461",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8787",
+              "path": [
+                "api",
+                "data"
+              ],
+              "query": [
+                {
+                  "key": "NIM",
+                  "value": "9352078461"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Fetch Data External with YMD",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8787/api/data?YMD=20230405",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8787",
+              "path": [
+                "api",
+                "data"
+              ],
+              "query": [
+                {
+                  "key": "YMD",
+                  "value": "20230405"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Fetch Data External with NAMA,NIM,YMD",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8787/api/data?NAMA=Turner Mia&NIM=9352078461&YMD=20220713",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8787",
+              "path": [
+                "api",
+                "data"
+              ],
+              "query": [
+                {
+                  "key": "NAMA",
+                  "value": "Turner Mia"
+                },
+                {
+                  "key": "NIM",
+                  "value": "9352078461"
+                },
+                {
+                  "key": "YMD",
+                  "value": "20220713"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Login User",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Extract token from response",
+              "const jsonData = pm.response.json();",
+              "let token = null;",
+              "",
+              "// Check for common token field names",
+              "if (jsonData.access_token) {",
+              "    token = jsonData.access_token;",
+              "}",
+              "",
+              "// Store token in environment variable",
+              "if (token) {",
+              "    pm.environment.set(\"TOKEN\", token);",
+              "}",
+              "",
+              "// Test to verify token was extracted and stored",
+              "pm.test(\"Token extracted and stored successfully\", function () {",
+              "    pm.expect(token).to.not.be.null;",
+              "    pm.expect(pm.environment.get(\"TOKEN\")).to.eql(token);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"admin@example.com\",\r\n    \"password\": \"password\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8787/api/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8787",
+          "path": [
+            "api",
+            "login"
+          ]
+        },
+        "description": "Generated from cURL: curl -X POST http://localhost/api/login \\\r\n     -H \"Content-Type: application/json\" \\\r\n     -H \"Accept: application/json\" \\\r\n     -d '{\"email\": \"admin@example.com\", \"password\": \"password\"}'"
+      },
+      "response": []
+    }
+  ]
+}
